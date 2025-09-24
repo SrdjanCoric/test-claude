@@ -333,5 +333,21 @@
         "postedAt": 1550415023853
       }
     ]
+  },
+  {
+    "author": "Srdjan",
+    "body": "My Comment",
+    "id": "48f2756a-6b61-469b-bb5d-44349b1a6a20",
+    "postedAt": 1758729932561,
+    "replies_count": 0,
+    "replies": []
+  },
+  {
+    "author": "Max",
+    "body": "My Comment",
+    "id": "46d9b8b9-cffc-4fbe-b79a-bf3fd53319af",
+    "postedAt": 1758729978069,
+    "replies_count": 0,
+    "replies": []
   }
 ]
