@@ -31,6 +31,27 @@ const data = {
     comments = comments.concat(newComment);
     writeFileSync(DATA_FILE_PATH, stringify(comments, null, 2, 100));
     return newComment;
+  },
+
+  deleteComment: (commentId) => {
+    const comments = JSON.parse(readFileSync(DATA_FILE_PATH));
+    const index = comments.findIndex(c => c.id === commentId);
+    if (index === -1) return null;
+    const deleted = comments.splice(index, 1)[0];
+    writeFileSync(DATA_FILE_PATH, stringify(comments, null, 2, 100));
+    return deleted;
+  },
+
+  deleteReply: (commentId, replyId) => {
+    const comments = JSON.parse(readFileSync(DATA_FILE_PATH));
+    const comment = comments.find(c => c.id === commentId);
+    if (!comment) return null;
+    const replyIndex = comment.replies.findIndex(r => r.id === replyId);
+    if (replyIndex === -1) return null;
+    const deleted = comment.replies.splice(replyIndex, 1)[0];
+    comment.replies_count = comment.replies.length;
+    writeFileSync(DATA_FILE_PATH, stringify(comments, null, 2, 100));
+    return deleted;
   }
 }
 

@@ -24,7 +24,26 @@ input, textarea {
 }
 
 .comment {
+  position: relative;
   padding-bottom: 20px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  padding: 4px;
+  opacity: 0.5;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  color: #777;
 }
 
 .comment p {

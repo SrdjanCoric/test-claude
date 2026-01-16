@@ -18,7 +18,13 @@ it("contains how more replies link", () => {
       },
     ],
   };
-  render(<CommentThread comment={mockComment} onMoreReplies={vi.fn()} />);
+  render(
+    <CommentThread
+      comment={mockComment}
+      onMoreReplies={vi.fn()}
+      onDelete={vi.fn()}
+    />
+  );
   const link = screen.getByRole("link", {
     name: `Show More Replies (${mockComment.replies_count - 1})`,
   });
