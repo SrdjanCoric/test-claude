@@ -74,10 +74,11 @@ const App = () => {
         setComments((prev) =>
           prev.map((c) => {
             if (c.id === commentId) {
+              const filteredReplies = c.replies.filter((r) => r.id !== id);
               return {
                 ...c,
-                replies: c.replies.filter((r) => r.id !== id),
-                replies_count: c.replies_count - 1,
+                replies: filteredReplies,
+                replies_count: filteredReplies.length,
               };
             }
             return c;
