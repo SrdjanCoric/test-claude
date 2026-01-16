@@ -4,6 +4,8 @@ import Comments from "./components/Comments";
 import { type CommentWithReplies, type NewComment } from "./types/index.js";
 import {
   createComment,
+  deleteComment,
+  deleteReply,
   getComments,
   getMoreReplies,
 } from "./services/comments.js";
@@ -64,9 +66,41 @@ const App = () => {
     }
   };
 
+  const handleDelete = async (id: string, commentId?: string) => {
+    try {
+      if (commentId) {
+        // Deleting a reply
+        await deleteReply(commentId, id);
+        setComments((prev) =>
+          prev.map((c) => {
+            if (c.id === commentId) {
+              const filteredReplies = c.replies.filter((r) => r.id !== id);
+              return {
+                ...c,
+                replies: filteredReplies,
+                replies_count: filteredReplies.length,
+              };
+            }
+            return c;
+          })
+        );
+      } else {
+        // Deleting top-level comment
+        await deleteComment(id);
+        setComments((prev) => prev.filter((c) => c.id !== id));
+      }
+    } catch (e: unknown) {
+      console.log(e);
+    }
+  };
+
   return (
     <div>
-      <Comments comments={comments} onMoreReplies={handleMoreReplies} />
+      <Comments
+        comments={comments}
+        onMoreReplies={handleMoreReplies}
+        onDelete={handleDelete}
+      />
       <AddCommentForm onSubmit={handleSubmit} />
     </div>
   );

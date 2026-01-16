@@ -1,6 +1,11 @@
 import App from "./App";
 import { render, screen } from "@testing-library/react";
-import { getComments, getMoreReplies } from "./services/comments";
+import {
+  getComments,
+  getMoreReplies,
+  deleteComment,
+  deleteReply,
+} from "./services/comments";
 import userEvent from "@testing-library/user-event";
 // import * as commentService from "./services/comments"
 
@@ -8,6 +13,8 @@ vi.mock("./services/comments.ts");
 
 const mockedGetComments = vi.mocked(getComments);
 const mockedGetMoreReplies = vi.mocked(getMoreReplies);
+const mockedDeleteComment = vi.mocked(deleteComment);
+const mockedDeleteReply = vi.mocked(deleteReply);
 
 afterEach(() => {
   vi.resetAllMocks();

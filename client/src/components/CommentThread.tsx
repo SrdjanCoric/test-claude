@@ -4,28 +4,34 @@ import Comment from "./Comment";
 interface CommentThreadProps {
   comment: CommentWithReplies;
   onMoreReplies: (commentId: string) => void;
+  onDelete: (id: string, commentId?: string) => void;
 }
 
-const CommentThread = ({ comment, onMoreReplies }: CommentThreadProps) => {
-  // const handleMoreReplies = (e: React.SyntheticEvent) => {
-  //   e.preventDefault();
-  //   onMoreReplies(comment.id);
-  // };
+const CommentThread = ({
+  comment,
+  onMoreReplies,
+  onDelete,
+}: CommentThreadProps) => {
   return (
     <div className="parent-comment">
       <Comment
+        id={comment.id}
         author={comment.author}
         body={comment.body}
         postedAt={comment.postedAt}
+        onDelete={onDelete}
       />
       <div className="replies">
         {comment.replies.map((reply) => {
           return (
             <Comment
               key={reply.id}
+              id={reply.id}
+              commentId={comment.id}
               author={reply.author}
               body={reply.body}
               postedAt={reply.postedAt}
+              onDelete={onDelete}
             />
           );
         })}
