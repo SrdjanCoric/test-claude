@@ -15,7 +15,7 @@ on:
 jobs:
   # Automatic PR review job
   pr-review:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.actor != 'claude[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: read
